@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "instant-datapack",
+  "id": "global-datapack",
   "version": "${version}",
-  "name": "Instant Datapack",
+  "name": "Global Datapack",
   "description": "Makes a global datapack folder so you don't have to copy datapacks between worlds.",
   "authors": [
     "Declipsonator"
@@ -12,11 +12,11 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "me.declipsonator.instantdatapack.InstantDatapack"
+      "me.declipsonator.globaldatapack.GlobalDatapack"
     ]
   },
   "mixins": [
-    "instant-datapack.mixins.json"
+    "global-datapack.mixins.json"
   ],
   "depends": {
     "minecraft": ">=1.18.2"
