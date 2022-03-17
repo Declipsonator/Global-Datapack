@@ -1,4 +1,4 @@
-package me.declipsonator.instantdatapack;
+package me.declipsonator.globaldatapack;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
-public class InstantDatapack implements ModInitializer {
+public class GlobalDatapack implements ModInitializer {
     public static Logger LOG = LogManager.getLogger();
     public static File globalPackFolder = new File(FabricLoader.getInstance().getGameDir().toString() + "\\datapacks");
 
@@ -20,6 +20,6 @@ public class InstantDatapack implements ModInitializer {
             e.printStackTrace();
         }
 
-        LOG.info("Initialized InstantDatapack");
+        LOG.info("Initialized GlobalDatapack");
     }
 }
