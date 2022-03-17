@@ -1,6 +1,6 @@
-package me.declipsonator.instantdatapack.mixins;
+package me.declipsonator.globaldatapack.mixins;
 
-import me.declipsonator.instantdatapack.InstantDatapack;
+import me.declipsonator.globaldatapack.GlobalDatapack;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.resource.*;
 import net.minecraft.util.WorldSavePath;
@@ -16,7 +16,7 @@ public class MinecraftClientMixin {
     private static void addGlobal(LevelStorage.Session session, CallbackInfoReturnable<ResourcePackManager> cir) {
         cir.setReturnValue(new ResourcePackManager(ResourceType.SERVER_DATA, new VanillaDataPackProvider(),
                 new FileResourcePackProvider(session.getDirectory(WorldSavePath.DATAPACKS).toFile(), ResourcePackSource.PACK_SOURCE_WORLD),
-                new FileResourcePackProvider(InstantDatapack.globalPackFolder, ResourcePackSource.PACK_SOURCE_WORLD)));
+                new FileResourcePackProvider(GlobalDatapack.globalPackFolder, ResourcePackSource.PACK_SOURCE_WORLD)));
         cir.cancel();
     }
 }
