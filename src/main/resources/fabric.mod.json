@@ -8,7 +8,7 @@
     "Declipsonator"
   ],
   "contact": {},
-  "icon": "assets/instant-datapack/icon.png",
+  "icon": "assets/global-datapack/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
