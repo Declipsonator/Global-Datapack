@@ -5,17 +5,17 @@ import net.fabricmc.loader.api.FabricLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.File;
+import java.nio.file.Path;
 
 public class GlobalDatapack implements ModInitializer {
     public static Logger LOG = LogManager.getLogger();
-    public static File globalPackFolder = new File(FabricLoader.getInstance().getGameDir().toString() + "\\datapacks");
+    public static Path globalPackFolder = FabricLoader.getInstance().getGameDir().resolve("datapacks");
 
 
     @Override
     public void onInitialize() {
         try {
-            globalPackFolder.mkdirs();
+            globalPackFolder.toFile().mkdirs();
         } catch (Exception e) {
             e.printStackTrace();
         }

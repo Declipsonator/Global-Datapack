@@ -16,7 +16,7 @@ public class MinecraftClientMixin {
     private static void addGlobal(LevelStorage.Session session, CallbackInfoReturnable<ResourcePackManager> cir) {
         cir.setReturnValue(new ResourcePackManager(ResourceType.SERVER_DATA, new VanillaDataPackProvider(),
                 new FileResourcePackProvider(session.getDirectory(WorldSavePath.DATAPACKS).toFile(), ResourcePackSource.PACK_SOURCE_WORLD),
-                new FileResourcePackProvider(GlobalDatapack.globalPackFolder, ResourcePackSource.PACK_SOURCE_WORLD)));
+                new FileResourcePackProvider(GlobalDatapack.globalPackFolder.toFile(), ResourcePackSource.PACK_SOURCE_WORLD)));
         cir.cancel();
     }
 }
