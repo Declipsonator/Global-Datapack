@@ -8,8 +8,8 @@ import org.apache.logging.log4j.Logger;
 import java.nio.file.Path;
 
 public class GlobalDatapack implements ModInitializer {
-    public static Logger LOG = LogManager.getLogger();
-    public static Path globalPackFolder = FabricLoader.getInstance().getGameDir().resolve("datapacks");
+    public static final Logger LOG = LogManager.getLogger();
+    public static final Path globalPackFolder = FabricLoader.getInstance().getGameDir().resolve("datapacks");
 
 
     @Override

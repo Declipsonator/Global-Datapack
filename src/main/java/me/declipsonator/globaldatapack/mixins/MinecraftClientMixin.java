@@ -3,20 +3,27 @@ package me.declipsonator.globaldatapack.mixins;
 import me.declipsonator.globaldatapack.GlobalDatapack;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.resource.*;
-import net.minecraft.util.WorldSavePath;
-import net.minecraft.world.level.storage.LevelStorage;
+import net.minecraft.server.integrated.IntegratedServer;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
+
+import java.util.ArrayList;
 
 @Mixin(MinecraftClient.class)
 public class MinecraftClientMixin {
-    @Inject(method = "createServerDataManager", at = @At("HEAD"), cancellable = true)
-    private static void addGlobal(LevelStorage.Session session, CallbackInfoReturnable<ResourcePackManager> cir) {
-        cir.setReturnValue(new ResourcePackManager(ResourceType.SERVER_DATA, new VanillaDataPackProvider(),
-                new FileResourcePackProvider(session.getDirectory(WorldSavePath.DATAPACKS).toFile(), ResourcePackSource.PACK_SOURCE_WORLD),
-                new FileResourcePackProvider(GlobalDatapack.globalPackFolder.toFile(), ResourcePackSource.PACK_SOURCE_WORLD)));
-        cir.cancel();
+
+    @Shadow @Nullable private IntegratedServer server;
+
+    @ModifyVariable(method = "startIntegratedServer", at = @At(value = "HEAD"), index = 3, argsOnly = true)
+    private ResourcePackManager addGlobal(ResourcePackManager value) {
+        ArrayList<ResourcePackProvider> added = new ArrayList<>(((ResourcePackManagerAccessor) value).getProviders());
+
+        added.add(new FileResourcePackProvider(GlobalDatapack.globalPackFolder.toFile(), ResourcePackSource.PACK_SOURCE_WORLD));
+        return new ResourcePackManager(ResourceType.SERVER_DATA,
+                added.toArray(new ResourcePackProvider[0]));
+
     }
 }

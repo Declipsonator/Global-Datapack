@@ -4,7 +4,8 @@
   "package": "me.declipsonator.globaldatapack.mixins",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "MinecraftClientMixin"
+    "MinecraftClientMixin",
+    "ResourcePackManagerAccessor"
   ],
   "client": [
   ],
