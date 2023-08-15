@@ -8,6 +8,7 @@
   ],
   "client": [
     "IntegratedServerLoaderMixin",
+    "IntegratedServerMixin",
     "MoreTabMixin"
   ],
   "injectors": {
