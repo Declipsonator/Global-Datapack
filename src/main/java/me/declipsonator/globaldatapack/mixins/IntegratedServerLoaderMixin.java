@@ -19,8 +19,8 @@ public class IntegratedServerLoaderMixin {
     @Unique
     @NotNull
     private ResourcePackManager getResourcePackManager(LevelStorage.Session session) {
-        ArrayList<ResourcePackProvider> added = new ArrayList<>(List.of(new ResourcePackProvider[]{new VanillaDataPackProvider(), new FileResourcePackProvider(session.getDirectory(WorldSavePath.DATAPACKS), ResourceType.SERVER_DATA, ResourcePackSource.WORLD)}));
-        added.add(new FileResourcePackProvider(GlobalDatapack.globalPackFolder, ResourceType.SERVER_DATA,  ResourcePackSource.WORLD));
+        ArrayList<ResourcePackProvider> added = new ArrayList<>(List.of(new ResourcePackProvider[]{new VanillaDataPackProvider(session.getLevelStorage().getSymlinkFinder()), new FileResourcePackProvider(session.getDirectory(WorldSavePath.DATAPACKS), ResourceType.SERVER_DATA, ResourcePackSource.WORLD, session.getLevelStorage().getSymlinkFinder())}));
+        added.add(new FileResourcePackProvider(GlobalDatapack.globalPackFolder, ResourceType.SERVER_DATA,  ResourcePackSource.WORLD, session.getLevelStorage().getSymlinkFinder()));
         return new ResourcePackManager(added.toArray(new ResourcePackProvider[0]));
     }
 
