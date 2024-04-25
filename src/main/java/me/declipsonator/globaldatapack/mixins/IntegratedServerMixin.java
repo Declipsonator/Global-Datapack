@@ -11,6 +11,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class IntegratedServerMixin {
     @Inject(method = "setupServer", at = @At("HEAD"))
     public void onSetup(CallbackInfoReturnable<Boolean> cir) {
-        ((IntegratedServer)(Object)this).reloadResources(((MinecraftServer)(Object)this).getDataPackManager().getEnabledNames());
+        ((IntegratedServer)(Object)this).reloadResources(((MinecraftServer)(Object)this).getDataPackManager().getEnabledIds());
     }
 }
