@@ -10,12 +10,14 @@ import java.nio.file.Path;
 public class GlobalDatapack implements ModInitializer {
     public static final Logger LOG = LogManager.getLogger();
     public static final Path globalPackFolder = FabricLoader.getInstance().getGameDir().resolve("datapacks");
+    public static final Path availablePackFolder = FabricLoader.getInstance().getGameDir().resolve("available_datapacks");
 
 
     @Override
     public void onInitialize() {
         try {
             globalPackFolder.toFile().mkdirs();
+            availablePackFolder.toFile().mkdirs();
         } catch (Exception e) {
             e.printStackTrace();
         }

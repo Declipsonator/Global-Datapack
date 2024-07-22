@@ -8,7 +8,7 @@
   ],
   "client": [
     "IntegratedServerLoaderMixin",
-    "IntegratedServerMixin",
+    "MinecraftMixin",
     "MoreTabMixin"
   ],
   "injectors": {

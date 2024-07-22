@@ -13,4 +13,8 @@ public interface ResourcePackManagerAccessor {
     @Accessor("providers")
     @Mutable
     Set<ResourcePackProvider> getProviders();
+
+    @Accessor("providers")
+    @Mutable
+    void setProviders(Set<ResourcePackProvider> providers);
 }
