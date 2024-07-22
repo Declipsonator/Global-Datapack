@@ -1,6 +1,5 @@
 package me.declipsonator.globaldatapack.mixins;
 
-import com.google.gson.JsonObject;
 import me.declipsonator.globaldatapack.GlobalDatapack;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.resource.*;
@@ -8,18 +7,16 @@ import net.minecraft.server.SaveLoader;
 import net.minecraft.world.level.storage.LevelStorage;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 
 @Mixin(MinecraftClient.class)
 public class MinecraftMixin {
     @ModifyVariable(method = "startIntegratedServer", at = @At("HEAD"), index = 2, argsOnly = true)
     private ResourcePackManager startIntegratedServer(ResourcePackManager value, LevelStorage.Session session, ResourcePackManager dataPackManager, SaveLoader saveLoader, boolean newWorld) {
-        if(!GlobalDatapack.config.has(session.getDirectoryName())) GlobalDatapack.config.add(session.getDirectoryName(), new JsonObject());
 
         // Get the other datapacks
         ArrayList<String> datapacks = new ArrayList<>(value.getIds());
@@ -43,15 +40,12 @@ public class MinecraftMixin {
 
         // They're not entirely disabled until they're added to this thing
         ArrayList<String> disabled = new ArrayList<>(saveLoader.saveProperties().getDataConfiguration().dataPacks().getDisabled());
+        Collection<String> enabled = value.getEnabledIds();
 
         for(String pack : newDatapacks) {
-            if(!disabled.contains(pack) &&
-                    (!GlobalDatapack.config.get(session.getDirectoryName()).getAsJsonObject().has(pack))
-                    || !GlobalDatapack.config.get(session.getDirectoryName()).getAsJsonObject().get(pack).getAsBoolean()) {
+            if(!disabled.contains(pack) && !enabled.contains(pack)) {
                 value.disable(pack);
                 disabled.add(pack);
-                if(!GlobalDatapack.config.get(session.getDirectoryName()).getAsJsonObject().has(pack))
-                    GlobalDatapack.config.get(session.getDirectoryName()).getAsJsonObject().addProperty(pack, false);
             } else {
                 value.enable(pack);
             }
