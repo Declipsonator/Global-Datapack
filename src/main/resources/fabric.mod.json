@@ -7,7 +7,9 @@
   "authors": [
     "Declipsonator"
   ],
-  "contact": {},
+  "contact": {
+    "github": "https://github.com/declipsonator"
+  },
   "icon": "assets/globaldatapack/icon.png",
   "environment": "*",
   "entrypoints": {
