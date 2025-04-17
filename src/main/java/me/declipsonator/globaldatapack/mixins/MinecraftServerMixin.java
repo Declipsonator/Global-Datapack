@@ -55,7 +55,7 @@ public abstract class MinecraftServerMixin {
         File[] files = directory.listFiles();
         if (files != null) {
             for (File file : files) {
-                if (file.isFile()) {
+                if (file.isFile() || file.isDirectory()) {
                     fileNames.add("file/" + file.getName());
                 }
             }
